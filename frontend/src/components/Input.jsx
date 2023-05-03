@@ -4,6 +4,7 @@ export const Input = ({
 	placeholder = 'Search Term',
 	name = 'searchbar',
 	className = 'input-container',
+	value,
 	onChange,
 }) => {
 	return (
@@ -13,6 +14,7 @@ export const Input = ({
 				onChange={onChange}
 				className='search-input'
 				name={name}
+				value={value}
 				placeholder={placeholder}
 			></input>
 		</div>

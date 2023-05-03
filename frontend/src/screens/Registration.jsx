@@ -38,7 +38,7 @@ const Registration = () => {
 				<div className='form-body'>
 					<div className='username'>
 						<label className='form__label' for='firstName'>
-							First Name{' '}
+							User Name{' '}
 						</label>
 						<input
 							className='form__input'
@@ -47,20 +47,6 @@ const Registration = () => {
 							onChange={(e) => handleInputChange(e)}
 							id='firstName'
 							placeholder='First Name'
-						/>
-					</div>
-					<div className='lastname'>
-						<label className='form__label' for='lastName'>
-							Last Name{' '}
-						</label>
-						<input
-							type='text'
-							name=''
-							id='lastName'
-							value={lastName}
-							className='form__input'
-							onChange={(e) => handleInputChange(e)}
-							placeholder='LastName'
 						/>
 					</div>
 					<div className='email'>

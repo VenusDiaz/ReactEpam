@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input } from '../Input';
 import { Button } from '../Button';
 import {
@@ -6,9 +6,32 @@ import {
 	CANCEL_CREATE_COURSE_LABEL,
 	CREATE_AUTHOR_LABEL,
 	CREATE_COURSE_LABEL,
+	DELETE_AUTHOR_LABEL,
 } from '../../utils/constants';
+import { formatDuration } from '../../utils/utilities';
+import { v4 as uuidv4 } from 'uuid';
+import {
+	useAddCourseMutation,
+	useAddAuthorMutation,
+} from '../../redux/courses-app-api/api';
 
 export const CreateCourse = ({ setShowAddCourseView, authors }) => {
+	const [duration, setDuration] = useState(0);
+	const [title, setTitle] = useState('');
+	const [description, setDescription] = useState('');
+	const [selectedAuthors, setSelectedAuthors] = useState([]);
+	const [newAuthors, setNewAuthors] = useState([]);
+	const [newAuthor, setNewAuthor] = useState('');
+	const [addCourse, { error: errorCourse }] = useAddCourseMutation();
+	const [addAuthor, { error: errorAuthor }] = useAddAuthorMutation();
+
+	useEffect(() => {
+		if (errorCourse !== undefined)
+			alert(`Course ERROR with: ${JSON.stringify(errorCourse)}`);
+		if (errorAuthor !== undefined)
+			alert(`Author ERROR with: ${JSON.stringify(errorAuthor)}`);
+	}, [errorCourse, errorAuthor]);
+
 	return (
 		<div className='add-course-container'>
 			<div className='add-title-section'>
@@ -18,14 +41,42 @@ export const CreateCourse = ({ setShowAddCourseView, authors }) => {
 						placeholder='Add title here...'
 						name='title'
 						className='add-input'
-						onChange={() => {}}
+						onChange={(e) => {
+							setTitle(e.target.value);
+						}}
 					></Input>
 				</div>
 				<div className='add-button'>
 					<Button
 						buttonText={CREATE_COURSE_LABEL}
-						onClick={() => {
-							setShowAddCourseView(false);
+						onClick={async () => {
+							if (title === '') {
+								alert('Invalid Title');
+								return;
+							}
+							if (description === '') {
+								alert('Invalid Description');
+								return;
+							}
+							if (selectedAuthors.length === 0 && newAuthors.length === 0) {
+								alert('Authors are empty');
+								return;
+							}
+							let newAuthorsIds = await Promise.all(
+								newAuthors.map(async (author) => {
+									let response = await addAuthor({ name: author.name });
+									if (response.statusCode === 201)
+										return response.data.result.id;
+								})
+							);
+
+							let response = await addCourse({
+								title: title,
+								description: description,
+								duration: Number.parseInt(duration),
+								authors: newAuthorsIds,
+							});
+							if (response === 201) setShowAddCourseView(false);
 						}}
 						className='add-button-container'
 					></Button>
@@ -40,7 +91,15 @@ export const CreateCourse = ({ setShowAddCourseView, authors }) => {
 			</div>
 			<div className='add-description-section'>
 				<h3>Description: </h3>
-				<textarea id='story' name='story' rows='5' cols='50'></textarea>
+				<textarea
+					onChange={(e) => {
+						setDescription(e.target.value);
+					}}
+					id='story'
+					name='story'
+					rows='5'
+					cols='50'
+				></textarea>
 			</div>
 			<div className='add-authors-section'>
 				<div className='authors-duration-section'>
@@ -51,10 +110,18 @@ export const CreateCourse = ({ setShowAddCourseView, authors }) => {
 							placeholder='Enter author here...'
 							name='author'
 							className='add-author'
-							onChange={() => {}}
+							onChange={(e) => {
+								setNewAuthor(e.target.value);
+							}}
 						></Input>
 						<Button
-							onClick={() => {}}
+							onClick={() => {
+								if (newAuthor !== '')
+									setNewAuthors([
+										...newAuthors,
+										{ name: newAuthor, id: uuidv4() },
+									]);
+							}}
 							buttonText={CREATE_AUTHOR_LABEL}
 							className='add-author-button'
 						></Button>
@@ -65,9 +132,12 @@ export const CreateCourse = ({ setShowAddCourseView, authors }) => {
 							placeholder='Enter duration in minutes...'
 							name='duration'
 							className='add-duration'
-							onChange={() => {}}
+							value={duration}
+							onChange={(e) => {
+								if (!isNaN(e.target.value)) setDuration(e.target.value);
+							}}
 						></Input>
-						<h1>00:00</h1>
+						<h1>{formatDuration(duration)}</h1>
 					</div>
 				</div>
 				<div className='add-existing-author-section'>
@@ -78,7 +148,13 @@ export const CreateCourse = ({ setShowAddCourseView, authors }) => {
 									<h3>{author.name}</h3>
 									<Button
 										className='add-author'
-										onClick={() => {}}
+										onClick={() => {
+											let index = selectedAuthors.findIndex(
+												(aut) => aut.id === author.id
+											);
+											if (index < 0)
+												setSelectedAuthors([...selectedAuthors, author]);
+										}}
 										buttonText={ADD_AUTHOR_LABEL}
 									></Button>
 								</div>
@@ -86,8 +162,47 @@ export const CreateCourse = ({ setShowAddCourseView, authors }) => {
 						})}
 					</div>
 					<div className='author-list-section'>
-						<h3>Course Authors</h3>
-						<span>Author list is empty</span>
+						<h3 style={{ textAlign: 'center' }}>Course Authors</h3>
+						{selectedAuthors.length === 0 && newAuthors.length === 0 ? (
+							<span>Author list is empty</span>
+						) : (
+							<>
+								{selectedAuthors.map((author) => {
+									return (
+										<div className='add-existing-author'>
+											<h3>{author.name}</h3>
+											<Button
+												className='add-author'
+												onClick={() => {
+													setSelectedAuthors(
+														selectedAuthors.filter(
+															(item) => item.id !== author.id
+														)
+													);
+												}}
+												buttonText={DELETE_AUTHOR_LABEL}
+											></Button>
+										</div>
+									);
+								})}
+								{newAuthors.map((author) => {
+									return (
+										<div className='add-existing-author'>
+											<h3>{author.name}</h3>
+											<Button
+												className='add-author'
+												onClick={() => {
+													setNewAuthors(
+														newAuthors.filter((item) => item.id !== author.id)
+													);
+												}}
+												buttonText={DELETE_AUTHOR_LABEL}
+											></Button>
+										</div>
+									);
+								})}
+							</>
+						)}
 					</div>
 				</div>
 			</div>

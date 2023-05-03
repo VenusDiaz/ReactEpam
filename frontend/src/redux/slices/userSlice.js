@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { api } from '../courses-app-api/api';
 
 const initialState = {
@@ -28,6 +28,13 @@ export const userSlice = createSlice({
 		);
 	},
 });
-
+export const filterUser = createSelector(
+	[(state) => state.userSlice.userName, (state) => state.userSlice.userEmail],
+	(name, email) => {
+		if (name && name !== '') return { user: name };
+		if (email && email !== '') return { user: email };
+		return { user: null };
+	}
+);
 export const { logOut } = userSlice.actions;
 export default userSlice.reducer;
