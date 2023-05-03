@@ -5,3 +5,7 @@ export const AUTHORS_LABEL = "Authors";
 export const DURATION_LABEL = "Duration";
 export const CREATED_LABEL = "Created";
 export const CARD_BUTTON_LABEL = "Show Course";
+export const CREATE_COURSE_LABEL = "Create course";
+export const CANCEL_CREATE_COURSE_LABEL = "Cancel";
+export const CREATE_AUTHOR_LABEL = "Create Author";
+export const ADD_AUTHOR_LABEL = "Add Author";

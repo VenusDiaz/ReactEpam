@@ -1,4 +1,4 @@
-const mockedAuthorsList = [
+export const mockedAuthorsList = [
   {
     id: "27cc3006-e93a-4748-8ca8-73d06aa93b6d",
     name: "Vasiliy Dobkin",

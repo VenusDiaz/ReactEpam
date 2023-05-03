@@ -1,6 +1,9 @@
 #header-container {
+    position: fixed;
+    top: 0;
     width: 100%;
     display: grid;
+    background-color: #ffc1c1;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 20px;
     grid-auto-rows: minmax(100px, auto);
@@ -19,13 +22,14 @@
 
 .user-container {
     display: grid;
-    grid-column: 4 / 5;
+    grid-column: 4/5;
     grid-row: 1;
-    margin: auto;
     padding: 5px;
-    text-align: center;
-    color: rgb(52, 30, 147);
+    text-align: right;
+    color: black;
     font-size: larger;
+    justify-content: end;
+    align-content: space-around;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
@@ -39,16 +43,18 @@
 }
 
 button {
-    border: 1px solid rgb(197, 125, 125);
-    border-radius: 5%;
-    font-size: 10px;
-    padding: 5px;
-    padding-right: 30px;
-    padding-left: 30px;
     color: white;
-    background-color: rgb(227, 52, 189);
+    background-color: rgb(192, 26, 92);
+
+    border-radius: 30px;
+    color: #fff;
+    display: inline-block;
+    font-family: sans-serif;
+    padding: 10px 20px 10px;
+    text-decoration: none;
 }
 
 button:hover {
-    background-color: rgb(127, 152, 189);
+    background: #ffffff;
+    color: black;
 }

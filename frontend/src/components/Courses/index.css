@@ -1,4 +1,5 @@
 .search-container {
+    padding-top: 100px;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -13,7 +14,7 @@
     padding-bottom: 8px;
     height: 40%;
     display: grid;
-    grid-column: 2/8;
+    grid-column: 2/6;
     grid-row: 1;
     text-align: center;
 }
@@ -24,7 +25,7 @@
 
 .button-search {
     display: grid;
-    grid-column: 8/10;
+    grid-column: 6/8;
     grid-row: 1;
     margin: auto;
     padding: 5px;
@@ -33,7 +34,7 @@
 
 .button-add {
     display: grid;
-    grid-column: 10/12;
+    grid-column: 11/13;
     grid-row: 1;
     margin: auto;
     padding: 5px;
@@ -75,4 +76,121 @@
     margin: auto;
     padding: 5px;
     text-align: center;
+}
+
+.card-button {
+    margin-top: 10px;
+}
+
+.add-course-container {
+    padding-top: 100px;
+    padding-top: 100px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 20px;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.add-title-section {
+    display: grid;
+    width: 100%;
+    grid-column: 1/13;
+    grid-row: 1;
+    margin: auto;
+    padding: 5px;
+    text-align: center;
+}
+
+.add-title-section input {
+    height: 90%;
+    width: 80%;
+    padding: auto;
+}
+
+.add-title {
+    display: grid;
+    grid-column: 1/2;
+    grid-row: 1;
+}
+
+.add-button {
+    display: flex;
+    grid-row: 1;
+    margin: auto;
+    padding: 5px;
+    text-align: center;
+}
+
+.add-button button {
+    margin-left: 20px;
+    margin-top: 70px;
+}
+
+.add-description-section {
+    display: grid;
+    grid-column: 1/13;
+    grid-row: 2;
+    padding: 0px 15px;
+    text-align: center;
+}
+
+.add-authors-section {
+    display: grid;
+    grid-column: 1/13;
+    grid-row: 3;
+    padding: 0px 15px;
+    text-align: center;
+}
+
+.authors-duration-section {
+    display: grid;
+    grid-column: 1/6;
+    grid-row: 3;
+    padding: 0px 15px;
+    text-align: center;
+}
+
+.author-creation-section input {
+    height: 30px;
+    width: 80%;
+}
+
+.add-duration input {
+    height: 30px;
+    width: 80%;
+}
+
+.add-author-button {
+
+    text-align: center;
+    justify-items: center;
+    display: grid;
+    grid-column: 5;
+    grid-row: 1;
+    margin: auto;
+    margin-top: 10px;
+
+}
+
+.add-existing-author-section {
+    display: grid;
+    grid-column: 6/12;
+    grid-row: 3;
+    text-align: center;
+}
+
+.add-existing-author {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.add-existing-author button {
+    margin: 15px 50px 0px 50px;
+}
+
+.author-list-section {
+    text-align: left;
+    margin-left: 50px;
 }
