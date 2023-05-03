@@ -6,13 +6,16 @@ import {
 	DURATION_LABEL,
 } from '../../utils/constants';
 import { Button } from '../Button';
+import { useNavigate } from 'react-router-dom';
 export const CourseCard = ({
 	title,
 	description,
 	authors,
 	duration,
 	created,
+	id,
 }) => {
+	const navigate = useNavigate();
 	return (
 		<div className='card-container'>
 			<div className='card-info-section'>
@@ -39,7 +42,9 @@ export const CourseCard = ({
 				<Button
 					buttonText={CARD_BUTTON_LABEL}
 					className='card-button'
-					onClick={() => {}}
+					onClick={() => {
+						navigate(`info/${id}`);
+					}}
 				></Button>
 			</div>
 		</div>

@@ -60,6 +60,7 @@ export const Courses = () => {
 								duration={course.duration}
 								description={course.description}
 								created={course.creationDate}
+								id={course.id}
 								key={course.id}
 							></CourseCard>
 						);

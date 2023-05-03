@@ -2,12 +2,38 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import Login from './screens/Login';
+import Registration from './screens/Registration';
 import reportWebVitals from './reportWebVitals';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import CourseInfo from './screens/CourseInfo';
+import store from './redux/store';
+import { Provider } from 'react-redux';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <App />,
+	},
+	{
+		path: 'login',
+		element: <Login />,
+	},
+	{
+		path: 'registration',
+		element: <Registration />,
+	},
+	{
+		path: 'info/:id',
+		element: <CourseInfo />,
+	},
+]);
+
+ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
-		<App />
+		<Provider store={store}>
+			<RouterProvider router={router} />
+		</Provider>
 	</React.StrictMode>
 );
 
