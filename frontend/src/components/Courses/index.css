@@ -1,0 +1,78 @@
+.search-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 20px;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.input-container {
+    width: 100%;
+    margin: auto;
+    padding: 5px;
+    padding-bottom: 8px;
+    height: 40%;
+    display: grid;
+    grid-column: 2/8;
+    grid-row: 1;
+    text-align: center;
+}
+
+.input-container input {
+    width: 100%;
+}
+
+.button-search {
+    display: grid;
+    grid-column: 8/10;
+    grid-row: 1;
+    margin: auto;
+    padding: 5px;
+    text-align: center;
+}
+
+.button-add {
+    display: grid;
+    grid-column: 10/12;
+    grid-row: 1;
+    margin: auto;
+    padding: 5px;
+    text-align: center;
+}
+
+/*CARDS*/
+.card-container {
+    padding: 20px 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 20px;
+    grid-auto-rows: minmax(100px, auto);
+    border-bottom: 1px solid salmon;
+    border-top: 1px solid salmon;
+}
+
+.card-info-section {
+    display: grid;
+    grid-column: 2/8;
+    grid-row: 1;
+    margin: auto;
+    padding: 5px;
+}
+
+.card-title-container {
+    text-align: center;
+}
+
+.card-description-container {
+    text-align: justify;
+}
+
+.card-actions-section {
+    display: grid;
+    grid-column: 9/12;
+    grid-row: 1;
+    margin: auto;
+    padding: 5px;
+    text-align: center;
+}

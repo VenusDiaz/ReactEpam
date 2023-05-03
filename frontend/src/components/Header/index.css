@@ -1,0 +1,54 @@
+#header-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+    grid-auto-rows: minmax(100px, auto);
+    border-bottom: 2px solid black;
+}
+
+.logo-container {
+    grid-column: 1;
+    grid-row: 1;
+    margin: auto;
+    width: 15%;
+    padding-bottom: 5px;
+    font-size: 80px;
+
+}
+
+.user-container {
+    display: grid;
+    grid-column: 4 / 5;
+    grid-row: 1;
+    margin: auto;
+    padding: 5px;
+    text-align: center;
+    color: rgb(52, 30, 147);
+    font-size: larger;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.button-container {
+    display: grid;
+    grid-column: 5;
+    grid-row: 1;
+    margin: auto;
+    padding: 5px;
+    text-align: center;
+}
+
+button {
+    border: 1px solid rgb(197, 125, 125);
+    border-radius: 5%;
+    font-size: 10px;
+    padding: 5px;
+    padding-right: 30px;
+    padding-left: 30px;
+    color: white;
+    background-color: rgb(227, 52, 189);
+}
+
+button:hover {
+    background-color: rgb(127, 152, 189);
+}
