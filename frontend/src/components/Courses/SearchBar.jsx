@@ -2,12 +2,10 @@ import React from 'react';
 import { Input } from '../Input';
 import { Button } from '../Button';
 import { ADD_COURSE_LABEL, SEARCH_LABEL } from '../../utils/constants';
+import { useNavigate } from 'react-router-dom';
 
-export const SearchBar = ({
-	setSearchTerm,
-	setFilteredCourseList,
-	setShowAddCourseView,
-}) => {
+export const SearchBar = ({ setSearchTerm, setFilteredCourseList }) => {
+	const navigate = useNavigate();
 	return (
 		<div className='search-container'>
 			<Input
@@ -26,7 +24,7 @@ export const SearchBar = ({
 				className={'button-add'}
 				buttonText={ADD_COURSE_LABEL}
 				onClick={() => {
-					setShowAddCourseView(true);
+					navigate('/courses/add');
 				}}
 			></Button>
 		</div>

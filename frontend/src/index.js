@@ -2,13 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Login from './screens/Login';
 import Registration from './screens/Registration';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import CourseInfo from './screens/CourseInfo';
 import store from './redux/store';
 import { Provider } from 'react-redux';
+import { Courses } from './screens/Courses';
+import { CreateCourse } from './screens/CreateCourse';
 
 const router = createBrowserRouter([
 	{
@@ -16,8 +17,8 @@ const router = createBrowserRouter([
 		element: <App />,
 	},
 	{
-		path: 'login',
-		element: <Login />,
+		path: '/courses',
+		element: <Courses />,
 	},
 	{
 		path: 'registration',
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
 	{
 		path: '/courses/:courseId',
 		element: <CourseInfo />,
+	},
+	{
+		path: '/courses/add',
+		element: <CreateCourse />,
 	},
 ]);
 

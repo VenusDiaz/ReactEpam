@@ -29,6 +29,19 @@ export const api = createApi({
 				body: request,
 			}),
 		}),
+		deleteCourse: build.mutation({
+			query: (id) => ({
+				url: `/courses/${id}`,
+				method: 'DELETE',
+			}),
+		}),
+		updateCourse: build.mutation({
+			query: ({ id, request }) => ({
+				url: `/courses/${id}`,
+				method: 'PUT',
+				body: request,
+			}),
+		}),
 		addAuthor: build.mutation({
 			query: (request) => ({
 				url: '/authors/add',
@@ -63,4 +76,6 @@ export const {
 	useAddAuthorMutation,
 	useGetCourseByIdQuery,
 	useCreateUserMutation,
+	useDeleteCourseMutation,
+	useUpdateCourseMutation,
 } = api;

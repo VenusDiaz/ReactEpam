@@ -27,7 +27,7 @@ export const Header = () => {
 				<>
 					<Button
 						onClick={() => {
-							navigate('/login');
+							navigate('/');
 						}}
 						buttonText={LOGIN_LABEL}
 					></Button>
@@ -43,6 +43,7 @@ export const Header = () => {
 				<Button
 					onClick={() => {
 						dispatch(logOut());
+						navigate('/');
 					}}
 					buttonText={LOG_OUT}
 					className='register-button-container'

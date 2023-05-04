@@ -48,7 +48,7 @@ const Registration = () => {
 			email: email,
 			password: password,
 		});
-		console.log(response);
+
 		login({ email: email, password: password });
 		if (response?.data?.successful) {
 			navigate('/');
@@ -117,6 +117,9 @@ const Registration = () => {
 					<button onClick={() => handleSubmit()} type='submit' class='btn'>
 						Register
 					</button>
+					<div>
+						if you have an account <a href='/login'>Login</a> here
+					</div>
 				</div>
 			</div>
 		</div>

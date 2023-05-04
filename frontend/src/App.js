@@ -1,12 +1,13 @@
 import './App.css';
-import { Courses } from './components/Courses';
+
 import { Header } from './components/Header';
+import Login from './screens/Login';
 
 function App() {
 	return (
 		<div className='App'>
 			<Header></Header>
-			<Courses></Courses>
+			<Login></Login>
 		</div>
 	);
 }

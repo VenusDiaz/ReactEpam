@@ -6,7 +6,8 @@ import {
 	DURATION_LABEL,
 } from '../../utils/constants';
 import { Button } from '../Button';
-import { createSearchParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 export const CourseCard = ({
 	title,
 	description,
@@ -14,6 +15,7 @@ export const CourseCard = ({
 	duration,
 	created,
 	id,
+	deleteCourse,
 }) => {
 	const navigate = useNavigate();
 	return (
@@ -48,6 +50,16 @@ export const CourseCard = ({
 						});
 					}}
 				></Button>
+				<div className='action-button-card'>
+					<button
+						onClick={() => {
+							deleteCourse(id);
+						}}
+					>
+						Delete
+					</button>{' '}
+					<button>Edit</button>
+				</div>
 			</div>
 		</div>
 	);

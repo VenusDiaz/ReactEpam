@@ -69,14 +69,17 @@ export const CreateCourse = ({ setShowAddCourseView, authors }) => {
 										return response.data.result.id;
 								})
 							);
+							let oldAuthors = selectedAuthors.map((author) => {
+								return author.id;
+							});
 
 							let response = await addCourse({
 								title: title,
 								description: description,
 								duration: Number.parseInt(duration),
-								authors: newAuthorsIds,
+								authors: newAuthors.concat(oldAuthors),
 							});
-							if (response === 201) setShowAddCourseView(false);
+							if (response.data.successful) setShowAddCourseView(false);
 						}}
 						className='add-button-container'
 					></Button>

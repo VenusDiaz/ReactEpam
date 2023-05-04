@@ -3,11 +3,16 @@ import { Header } from '../components/Header';
 import './Login.css';
 import { useLoginMutation } from '../redux/courses-app-api/api';
 import { useNavigate } from 'react-router-dom';
+import { filterUser } from '../redux/slices/userSlice';
+import { useSelector } from 'react-redux';
 const Login = () => {
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
 	const [login, { isSuccess, error, data }] = useLoginMutation();
 	const navigate = useNavigate();
+	const userInfo = useSelector((state) => filterUser(state));
+
+	if (userInfo.user != null) navigate('/courses');
 
 	const handleInputChange = (e) => {
 		const { id, value } = e.target;
@@ -27,11 +32,9 @@ const Login = () => {
 
 	const handleSubmit = () => {
 		login({ email: email, password: password });
-		console.log(email, password);
 	};
 	return (
 		<div className='App'>
-			<Header></Header>
 			<div className='form'>
 				<h2>Login</h2>
 				<div className='form-body'>

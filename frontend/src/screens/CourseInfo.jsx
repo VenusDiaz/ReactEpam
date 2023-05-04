@@ -12,22 +12,22 @@ import {
 const CourseInfo = () => {
 	const { data: authorsData } = useGetAllAuthorsQuery();
 	const { courseId } = useParams();
-	console.log(courseId);
+
 	const navigate = useNavigate();
 	const { data: course } = useGetCourseByIdQuery(courseId);
-	console.log(course);
+
 	return (
 		<div>
 			<Header></Header>
 			<div className='course-info-container'>
-				<a
-					href='/'
+				<button
+					href='#'
 					onClick={() => {
 						navigate('/');
 					}}
 				>
 					Go Back
-				</a>
+				</button>
 				<div className='card-info-title'>{course?.result?.title}</div>
 				<div className='card-info-description'>
 					<p>{course?.result?.description}</p>
