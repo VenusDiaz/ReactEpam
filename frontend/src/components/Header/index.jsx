@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Logo } from './Logo';
 import { User } from './User';
 import { Button } from '../Button';
@@ -8,11 +8,19 @@ import { LOGIN_LABEL, LOG_OUT, REGISTER_LABEL } from '../../utils/constants';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterUser, logOut } from '../../redux/slices/userSlice';
+import { useLazyUserMeQuery } from '../../redux/courses-app-api/api';
 
 export const Header = () => {
 	const navigate = useNavigate();
 	const userInfo = useSelector((state) => filterUser(state));
 	const dispatch = useDispatch();
+	const [grabUserData] = useLazyUserMeQuery();
+
+	useEffect(() => {
+		if (userInfo.user === null) {
+			grabUserData();
+		}
+	}, []);
 
 	return (
 		<div id='header-container'>
@@ -27,7 +35,7 @@ export const Header = () => {
 				<>
 					<Button
 						onClick={() => {
-							navigate('/');
+							navigate('/login');
 						}}
 						buttonText={LOGIN_LABEL}
 					></Button>

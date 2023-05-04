@@ -4,13 +4,13 @@ import { CourseCard } from '../components/Courses/CourseCard';
 import { SearchBar } from '../components/Courses/SearchBar';
 // import { mockedCoursesList } from '../../backend/courseList';
 // import { mockedAuthorsList } from '../../backend/authorList';
-import { CreateCourse } from '../components/Courses/CreateCourse';
+// import { CreateCourse } from '../components/Courses/CreateCourse';
+
 import {
 	useDeleteCourseMutation,
 	useGetAllAuthorsQuery,
 	useGetAllCoursesQuery,
 } from '../redux/courses-app-api/api';
-import { Header } from '../components/Header';
 
 export const Courses = () => {
 	const {
@@ -29,7 +29,7 @@ export const Courses = () => {
 	const allAuthors = authorsData?.result ? authorsData.result : [];
 	const [searchTerm, setSearchTerm] = useState('');
 
-	const [filteredCourseList, setFilteredCourseList] = useState(allCourses);
+	const [filteredCourseList, setFilteredCourseList] = useState([]);
 
 	let searchCourses = () => {
 		if (searchTerm !== '')
@@ -45,6 +45,7 @@ export const Courses = () => {
 			});
 		return allCourses;
 	};
+
 	useEffect(() => {
 		if (searchTerm === '') {
 			setFilteredCourseList(allCourses);
@@ -60,7 +61,6 @@ export const Courses = () => {
 
 	return (
 		<div>
-			<Header></Header>
 			{loadingAuthors || loadingCourses ? (
 				<>Loading...</>
 			) : (

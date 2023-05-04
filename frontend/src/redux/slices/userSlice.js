@@ -26,6 +26,14 @@ export const userSlice = createSlice({
 				state.userName = payload.user.name;
 			}
 		);
+		builder.addMatcher(
+			api.endpoints.userMe.matchFulfilled,
+			(state, { payload }) => {
+				state.token = payload.result.token;
+				state.userEmail = payload.result.email;
+				state.userName = payload.result.name;
+			}
+		);
 	},
 });
 export const filterUser = createSelector(

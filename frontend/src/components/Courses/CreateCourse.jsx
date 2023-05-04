@@ -77,7 +77,7 @@ export const CreateCourse = ({ setShowAddCourseView, authors }) => {
 								title: title,
 								description: description,
 								duration: Number.parseInt(duration),
-								authors: newAuthors.concat(oldAuthors),
+								authors: newAuthorsIds.concat(oldAuthors),
 							});
 							if (response.data.successful) setShowAddCourseView(false);
 						}}

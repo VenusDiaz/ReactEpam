@@ -72,12 +72,12 @@ export const CreateCourse = () => {
 								let newAuthorsIds = await Promise.all(
 									newAuthors.map(async (author) => {
 										let response = await addAuthor({ name: author.name });
-										console.log(response);
+
 										if (response.data.successful)
 											return response.data.result.id;
 									})
 								);
-								console.log(newAuthorsIds, newAuthors);
+
 								let oldAuthors = selectedAuthors.map((author) => {
 									return author.id;
 								});

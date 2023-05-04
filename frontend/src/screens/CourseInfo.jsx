@@ -1,5 +1,4 @@
 import React from 'react';
-import { Header } from '../components/Header';
 
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +17,6 @@ const CourseInfo = () => {
 
 	return (
 		<div>
-			<Header></Header>
 			<div className='course-info-container'>
 				<button
 					href='#'

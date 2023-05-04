@@ -7,7 +7,7 @@ export const api = createApi({
 	baseQuery: fetchBaseQuery({
 		baseUrl: URL_SERVICE,
 		prepareHeaders: (headers, { getState }) => {
-			const token = getState().userSlice.token;
+			const token = localStorage.getItem('token');
 			if (token) {
 				headers.set('Authorization', token);
 			}
@@ -52,6 +52,9 @@ export const api = createApi({
 		login: build.mutation({
 			query: (request) => ({ url: '/login', method: 'POST', body: request }),
 		}),
+		userMe: build.query({
+			query: () => ({ url: '/users/me', method: 'GET' }),
+		}),
 		createUser: build.mutation({
 			query: (request) => ({ url: '/register', method: 'POST', body: request }),
 		}),
@@ -78,4 +81,5 @@ export const {
 	useCreateUserMutation,
 	useDeleteCourseMutation,
 	useUpdateCourseMutation,
+	useLazyUserMeQuery,
 } = api;
