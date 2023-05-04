@@ -11,6 +11,7 @@ import {
 	useGetAllAuthorsQuery,
 	useGetAllCoursesQuery,
 } from '../redux/courses-app-api/api';
+import { useSelector } from 'react-redux';
 
 export const Courses = () => {
 	const {
@@ -30,6 +31,7 @@ export const Courses = () => {
 	const [searchTerm, setSearchTerm] = useState('');
 
 	const [filteredCourseList, setFilteredCourseList] = useState([]);
+	const userInfo = useSelector((state) => state.userSlice);
 
 	let searchCourses = () => {
 		if (searchTerm !== '')
@@ -51,6 +53,10 @@ export const Courses = () => {
 			setFilteredCourseList(allCourses);
 		}
 	}, [searchTerm, allCourses, isSuccess]);
+	useEffect(() => {
+		refetchCourses();
+		refetchAuthors();
+	}, []);
 
 	useEffect(() => {
 		if (isSuccess) {
@@ -82,6 +88,7 @@ export const Courses = () => {
 
 						return (
 							<CourseCard
+								isAdmin={userInfo.role === 'admin'}
 								deleteCourse={deleteCourse}
 								authors={authors.toString()}
 								title={course.title}

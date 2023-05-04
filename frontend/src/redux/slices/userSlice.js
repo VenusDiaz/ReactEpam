@@ -5,6 +5,7 @@ const initialState = {
 	userName: '',
 	token: null,
 	userEmail: '',
+	role: '',
 };
 
 export const userSlice = createSlice({
@@ -12,9 +13,11 @@ export const userSlice = createSlice({
 	initialState,
 	reducers: {
 		logOut: (state, action) => {
+			localStorage.setItem('token', null);
 			state.token = null;
 			state.userEmail = '';
 			state.userName = '';
+			state.role = '';
 		},
 	},
 	extraReducers: (builder) => {
@@ -29,9 +32,11 @@ export const userSlice = createSlice({
 		builder.addMatcher(
 			api.endpoints.userMe.matchFulfilled,
 			(state, { payload }) => {
+				console.log(payload);
 				state.token = payload.result.token;
 				state.userEmail = payload.result.email;
 				state.userName = payload.result.name;
+				state.role = payload.result?.role ? payload.result?.role : '';
 			}
 		);
 	},

@@ -17,6 +17,13 @@ export const api = createApi({
 	refetchOnFocus: true,
 	refetchOnReconnect: true,
 	endpoints: (build) => ({
+		updateCourse: build.mutation({
+			query: ({ id, body }) => ({
+				url: `/courses/${id}`,
+				method: 'PUT',
+				body: body,
+			}),
+		}),
 		getCourseById: build.query({
 			query: (id) => ({
 				url: `/courses/${id}`,
@@ -35,19 +42,16 @@ export const api = createApi({
 				method: 'DELETE',
 			}),
 		}),
-		updateCourse: build.mutation({
-			query: ({ id, request }) => ({
-				url: `/courses/${id}`,
-				method: 'PUT',
-				body: request,
-			}),
-		}),
+
 		addAuthor: build.mutation({
 			query: (request) => ({
 				url: '/authors/add',
 				method: 'POST',
 				body: request,
 			}),
+		}),
+		logout: build.query({
+			query: () => ({ url: '/logout', method: 'DELETE' }),
 		}),
 		login: build.mutation({
 			query: (request) => ({ url: '/login', method: 'POST', body: request }),
@@ -82,4 +86,5 @@ export const {
 	useDeleteCourseMutation,
 	useUpdateCourseMutation,
 	useLazyUserMeQuery,
+	useLazyLogoutQuery,
 } = api;

@@ -15,6 +15,7 @@ export const CourseCard = ({
 	duration,
 	created,
 	id,
+	isAdmin,
 	deleteCourse,
 }) => {
 	const navigate = useNavigate();
@@ -50,16 +51,26 @@ export const CourseCard = ({
 						});
 					}}
 				></Button>
-				<div className='action-button-card'>
-					<button
-						onClick={() => {
-							deleteCourse(id);
-						}}
-					>
-						Delete
-					</button>{' '}
-					<button>Edit</button>
-				</div>
+				{isAdmin ? (
+					<div className='action-button-card'>
+						<button
+							onClick={() => {
+								deleteCourse(id);
+							}}
+						>
+							Delete
+						</button>{' '}
+						<button
+							onClick={() => {
+								navigate(`/courses/update/${id}`);
+							}}
+						>
+							Edit
+						</button>
+					</div>
+				) : (
+					<></>
+				)}
 			</div>
 		</div>
 	);

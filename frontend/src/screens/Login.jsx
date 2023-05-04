@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
 import './Login.css';
-import { useLoginMutation } from '../redux/courses-app-api/api';
+import {
+	useLazyUserMeQuery,
+	useLoginMutation,
+} from '../redux/courses-app-api/api';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
 	const [login, { isSuccess }] = useLoginMutation();
+	const [grabUserData] = useLazyUserMeQuery();
 	const navigate = useNavigate();
 
 	const handleInputChange = (e) => {
@@ -26,8 +30,9 @@ const Login = () => {
 		}
 	}, [isSuccess, navigate]);
 
-	const handleSubmit = () => {
-		login({ email: email, password: password });
+	const handleSubmit = async () => {
+		await login({ email: email, password: password });
+		await grabUserData();
 	};
 	return (
 		<div className='App'>

@@ -8,19 +8,23 @@ import { LOGIN_LABEL, LOG_OUT, REGISTER_LABEL } from '../../utils/constants';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterUser, logOut } from '../../redux/slices/userSlice';
-import { useLazyUserMeQuery } from '../../redux/courses-app-api/api';
+import {
+	useLazyLogoutQuery,
+	useLazyUserMeQuery,
+} from '../../redux/courses-app-api/api';
 
 export const Header = () => {
 	const navigate = useNavigate();
 	const userInfo = useSelector((state) => filterUser(state));
 	const dispatch = useDispatch();
 	const [grabUserData] = useLazyUserMeQuery();
+	const [logout] = useLazyLogoutQuery();
 
 	useEffect(() => {
 		if (userInfo.user === null) {
 			grabUserData();
 		}
-	}, []);
+	}, [userInfo]);
 
 	return (
 		<div id='header-container'>
@@ -50,8 +54,9 @@ export const Header = () => {
 			) : (
 				<Button
 					onClick={() => {
+						logout();
 						dispatch(logOut());
-						navigate('/');
+						navigate('/login');
 					}}
 					buttonText={LOG_OUT}
 					className='register-button-container'
