@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from '../components/Header';
 import './Registration.css';
+import {
+	useCreateUserMutation,
+	useLoginMutation,
+} from '../redux/courses-app-api/api';
+import { useNavigate } from 'react-router-dom';
+
 const Registration = () => {
 	const [firstName, setFirstName] = useState(null);
-	const [lastName, setLastName] = useState(null);
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
 	const [confirmPassword, setConfirmPassword] = useState(null);
+	const [createUser, { error }] = useCreateUserMutation();
+	const [login] = useLoginMutation();
+	const navigate = useNavigate();
 
 	const handleInputChange = (e) => {
 		const { id, value } = e.target;
 		if (id === 'firstName') {
 			setFirstName(value);
-		}
-		if (id === 'lastName') {
-			setLastName(value);
 		}
 		if (id === 'email') {
 			setEmail(value);
@@ -26,9 +31,28 @@ const Registration = () => {
 			setConfirmPassword(value);
 		}
 	};
+	useEffect(() => {
+		if (error !== undefined) {
+			alert(JSON.stringify(error));
+		}
+	}, [error]);
 
-	const handleSubmit = () => {
-		console.log(firstName, lastName, email, password, confirmPassword);
+	const handleSubmit = async () => {
+		if (password !== confirmPassword) {
+			alert('Password no coincide');
+			return;
+		}
+
+		let response = await createUser({
+			name: firstName,
+			email: email,
+			password: password,
+		});
+		console.log(response);
+		login({ email: email, password: password });
+		if (response?.data?.successful) {
+			navigate('/');
+		}
 	};
 	return (
 		<div className='App'>
@@ -89,7 +113,7 @@ const Registration = () => {
 						/>
 					</div>
 				</div>
-				<div class='footer'>
+				<div className='footer'>
 					<button onClick={() => handleSubmit()} type='submit' class='btn'>
 						Register
 					</button>

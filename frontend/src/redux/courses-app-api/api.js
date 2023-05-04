@@ -17,6 +17,11 @@ export const api = createApi({
 	refetchOnFocus: true,
 	refetchOnReconnect: true,
 	endpoints: (build) => ({
+		getCourseById: build.query({
+			query: (id) => ({
+				url: `/courses/${id}`,
+			}),
+		}),
 		addCourse: build.mutation({
 			query: (request) => ({
 				url: '/courses/add',
@@ -33,6 +38,9 @@ export const api = createApi({
 		}),
 		login: build.mutation({
 			query: (request) => ({ url: '/login', method: 'POST', body: request }),
+		}),
+		createUser: build.mutation({
+			query: (request) => ({ url: '/register', method: 'POST', body: request }),
 		}),
 		getAllCourses: build.query({
 			query: (request) => ({
@@ -53,4 +61,6 @@ export const {
 	useGetAllAuthorsQuery,
 	useAddCourseMutation,
 	useAddAuthorMutation,
+	useGetCourseByIdQuery,
+	useCreateUserMutation,
 } = api;

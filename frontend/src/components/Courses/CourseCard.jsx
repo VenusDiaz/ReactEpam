@@ -6,7 +6,7 @@ import {
 	DURATION_LABEL,
 } from '../../utils/constants';
 import { Button } from '../Button';
-import { useNavigate } from 'react-router-dom';
+import { createSearchParams, useNavigate } from 'react-router-dom';
 export const CourseCard = ({
 	title,
 	description,
@@ -43,7 +43,9 @@ export const CourseCard = ({
 					buttonText={CARD_BUTTON_LABEL}
 					className='card-button'
 					onClick={() => {
-						navigate(`info/${id}`);
+						navigate({
+							pathname: `/courses/${id}`,
+						});
 					}}
 				></Button>
 			</div>
