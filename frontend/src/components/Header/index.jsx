@@ -27,7 +27,7 @@ export const Header = () => {
 	}, [userInfo]);
 
 	return (
-		<div id='header-container'>
+		<div id='header-container' data-testid='header-container'>
 			<Logo
 				src={logo}
 				onClick={() => {

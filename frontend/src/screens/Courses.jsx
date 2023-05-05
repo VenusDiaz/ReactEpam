@@ -53,6 +53,7 @@ export const Courses = () => {
 			setFilteredCourseList(allCourses);
 		}
 	}, [searchTerm, allCourses, isSuccess]);
+
 	useEffect(() => {
 		refetchCourses();
 		refetchAuthors();
