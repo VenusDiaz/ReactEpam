@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Courses.css';
-import { CourseCard } from '../components/Courses/CourseCard';
-import { SearchBar } from '../components/Courses/SearchBar';
+import { CourseCard } from '../../components/Courses/CourseCard';
+import { SearchBar } from '../../components/Courses/SearchBar';
 // import { mockedCoursesList } from '../../backend/courseList';
 // import { mockedAuthorsList } from '../../backend/authorList';
 // import { CreateCourse } from '../components/Courses/CreateCourse';
@@ -10,7 +10,7 @@ import {
 	useDeleteCourseMutation,
 	useGetAllAuthorsQuery,
 	useGetAllCoursesQuery,
-} from '../redux/courses-app-api/api';
+} from '../../redux/courses-app-api/api';
 import { useSelector } from 'react-redux';
 
 export const Courses = () => {

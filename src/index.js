@@ -9,7 +9,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CourseInfo from './screens/CourseInfo';
 import store from './redux/store';
 import { Provider, useSelector } from 'react-redux';
-import { Courses } from './screens/Courses';
+import { Courses } from './screens/Courses/Courses';
 import { CreateCourse } from './screens/CreateCourse';
 import { Header } from './components/Header';
 import Login from './screens/Login';
