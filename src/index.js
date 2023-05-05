@@ -7,7 +7,7 @@ import Registration from './screens/Registration';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CourseInfo from './screens/CourseInfo';
-import store from './redux/store';
+import { setupStore } from './redux/store';
 import { Provider, useSelector } from 'react-redux';
 import { Courses } from './screens/Courses/Courses';
 import { CreateCourse } from './screens/CreateCourse';
@@ -18,6 +18,7 @@ import ProtectedRoutes from './components/ProtectedRoutes';
 import Blocked from './screens/Blocked';
 import { CourseUpdate } from './screens/CourseUpdate';
 
+const store = setupStore({});
 const App = () => {
 	const userInfo = useSelector((state) => state.userSlice);
 

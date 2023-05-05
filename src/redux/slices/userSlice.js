@@ -32,7 +32,6 @@ export const userSlice = createSlice({
 		builder.addMatcher(
 			api.endpoints.userMe.matchFulfilled,
 			(state, { payload }) => {
-				console.log(payload);
 				state.token = payload.result.token;
 				state.userEmail = payload.result.email;
 				state.userName = payload.result.name;

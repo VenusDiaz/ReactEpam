@@ -54,7 +54,7 @@ export const CourseUpdate = () => {
 					});
 				return null;
 			});
-			console.log(authorsWithData);
+
 			setSelectedAuthors(authorsWithData);
 		}
 	}, [course, authorsData]);

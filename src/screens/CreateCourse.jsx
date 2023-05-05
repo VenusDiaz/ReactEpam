@@ -40,7 +40,7 @@ export const CreateCourse = () => {
 	return (
 		<>
 			<Header></Header>
-			<div className='add-course-container'>
+			<div className='add-course-container' data-testid='add-course-container'>
 				<div className='add-title-section'>
 					<div className='add-title'>
 						<h3>Title: </h3>

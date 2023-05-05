@@ -12,15 +12,20 @@ const authMiddleware = (store) => (next) => (action) => {
 	return next(action);
 };
 
-const store = configureStore({
-	reducer: {
-		[api.reducerPath]: api.reducer,
-		userSlice,
-	},
-	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware({ thunk: true })
-			.concat([api.middleware])
-			.concat(authMiddleware),
-});
-
-export default store;
+export const setupStore = (preloadedState) => {
+	return configureStore({
+		reducer: {
+			[api.reducerPath]: api.reducer,
+			userSlice,
+		},
+		preloadedState,
+		middleware: (getDefaultMiddleware) =>
+			getDefaultMiddleware({
+				thunk: true,
+				immutableCheck: false,
+				serializableCheck: false,
+			})
+				.concat([api.middleware])
+				.concat(authMiddleware),
+	});
+};

@@ -7,3 +7,18 @@ export const formatDuration = (durationInMinutes) => {
 
 	return `${formattedHours}:${formattedMinutes}`;
 };
+
+export const searchCourses = (searchTerm, allCourses) => {
+	if (searchTerm !== '')
+		return allCourses.filter((course) => {
+			const lowercaseQuery = searchTerm.toLowerCase();
+			const lowercaseTitle = course.title.toLowerCase();
+			const lowercaseId = course.id.toLowerCase();
+
+			return (
+				lowercaseTitle.includes(lowercaseQuery) ||
+				lowercaseId.includes(lowercaseQuery)
+			);
+		});
+	return allCourses;
+};

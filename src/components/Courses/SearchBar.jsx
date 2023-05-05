@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export const SearchBar = ({ setSearchTerm, setFilteredCourseList }) => {
 	const navigate = useNavigate();
 	return (
-		<div className='search-container'>
+		<div className='search-container' data-testid='search'>
 			<Input
 				onChange={(e) => {
 					setSearchTerm(e.target.value);

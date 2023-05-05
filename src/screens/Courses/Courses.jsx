@@ -12,17 +12,21 @@ import {
 	useGetAllCoursesQuery,
 } from '../../redux/courses-app-api/api';
 import { useSelector } from 'react-redux';
+import { searchCourses } from '../../utils/utilities';
 
 export const Courses = () => {
 	const {
 		refetch: refetchCourses,
 		isLoading: loadingCourses,
 		data: coursesData,
+		isSuccess: successAllCourses,
 	} = useGetAllCoursesQuery();
+
 	const {
 		refetch: refetchAuthors,
 		isLoading: loadingAuthors,
 		data: authorsData,
+		isSuccess: successAllAuthors,
 	} = useGetAllAuthorsQuery();
 	const [deleteCourse, { isSuccess }] = useDeleteCourseMutation();
 
@@ -33,26 +37,11 @@ export const Courses = () => {
 	const [filteredCourseList, setFilteredCourseList] = useState([]);
 	const userInfo = useSelector((state) => state.userSlice);
 
-	let searchCourses = () => {
-		if (searchTerm !== '')
-			return allCourses.filter((course) => {
-				const lowercaseQuery = searchTerm.toLowerCase();
-				const lowercaseTitle = course.title.toLowerCase();
-				const lowercaseId = course.id.toLowerCase();
-
-				return (
-					lowercaseTitle.includes(lowercaseQuery) ||
-					lowercaseId.includes(lowercaseQuery)
-				);
-			});
-		return allCourses;
-	};
-
 	useEffect(() => {
 		if (searchTerm === '') {
 			setFilteredCourseList(allCourses);
 		}
-	}, [searchTerm, allCourses, isSuccess]);
+	}, [searchTerm, isSuccess, successAllCourses, successAllAuthors]);
 
 	useEffect(() => {
 		refetchCourses();
@@ -64,10 +53,10 @@ export const Courses = () => {
 			refetchCourses();
 			refetchAuthors();
 		}
-	}, [refetchCourses, isSuccess, refetchAuthors]);
+	}, [isSuccess]);
 
 	return (
-		<div>
+		<div data-testid='cards-container'>
 			{loadingAuthors || loadingCourses ? (
 				<>Loading...</>
 			) : (
@@ -75,7 +64,7 @@ export const Courses = () => {
 					<SearchBar
 						setSearchTerm={setSearchTerm}
 						setFilteredCourseList={() => {
-							setFilteredCourseList(searchCourses());
+							setFilteredCourseList(searchCourses(searchTerm, allCourses));
 						}}
 					></SearchBar>
 
