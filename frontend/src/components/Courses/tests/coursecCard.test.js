@@ -69,7 +69,7 @@ describe('Course Card component', () => {
 			</Provider>
 		);
 		const container = queryByTestId('card-container');
-		const duration = queryByTestId('card-durationwe');
+		const duration = queryByTestId('card-duration');
 
 		//Header container
 		expect(container).toBeInTheDocument();
