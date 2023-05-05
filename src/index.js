@@ -21,6 +21,7 @@ import { CourseUpdate } from './screens/CourseUpdate';
 const store = setupStore({});
 const App = () => {
 	const userInfo = useSelector((state) => state.userSlice);
+	console.log(userInfo);
 
 	return (
 		<BrowserRouter>

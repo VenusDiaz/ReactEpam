@@ -5,13 +5,11 @@ import {
 	ADD_AUTHOR_LABEL,
 	CANCEL_CREATE_COURSE_LABEL,
 	CREATE_AUTHOR_LABEL,
-	CREATE_COURSE_LABEL,
 	DELETE_AUTHOR_LABEL,
 } from '../utils/constants';
 import { formatDuration } from '../utils/utilities';
 import { v4 as uuidv4 } from 'uuid';
 import {
-	useAddCourseMutation,
 	useAddAuthorMutation,
 	useGetAllAuthorsQuery,
 	useGetCourseByIdQuery,
